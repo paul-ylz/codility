@@ -1,0 +1,14 @@
+{
+  "name": "codility",
+  "version": "1.0.0",
+  "description": "attempts at codility lessons",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Paul Yeoh",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^25.5.4"
+  }
+}
