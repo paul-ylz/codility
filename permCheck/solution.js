@@ -18,6 +18,9 @@ function solution(A) {
     min = Math.min(min, el)
     max = Math.max(max, el)
   }
+  if (min !== 1) {
+    return 0
+  }
   if ((max-min) === A.length-1) {
     return 1
   }

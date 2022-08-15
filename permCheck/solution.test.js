@@ -10,6 +10,6 @@ describe("v1", () => {
   });
 
   test("five numbers starting with two", () => {
-    expect(v1([4,5,3,2,6])).toBe(1)
+    expect(v1([4,5,3,2,6])).toBe(0)
   });
 })
