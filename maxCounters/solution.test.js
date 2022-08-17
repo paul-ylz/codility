@@ -17,4 +17,12 @@ describe('maxCounters', () => {
 
     expect(v1(N, A)).toEqual(expected);
   });
+
+  test('all max counter', () => {
+    const A = new Array(100000).fill(100001);
+    const N = 100000;
+    const expected = new Array(100000).fill(0);
+
+    expect(v1(N, A)).toEqual(expected);
+  });
 });
