@@ -16,4 +16,13 @@ describe('genomic range query', () => {
     const expected = [1];
     expect(solution(S, P, Q)).toEqual(expected);
   });
+
+  test('extreme double', () => {
+    const S = "AC";
+    const P = [0,0,1];
+    const Q = [0,1,1];
+    const expected = [1,1,2];
+    expect(solution(S, P, Q)).toEqual(expected);
+  });
+
 });

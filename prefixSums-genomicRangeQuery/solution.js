@@ -37,10 +37,17 @@ function solution(S, P, Q) {
     const p = P[j];
     const q = Q[j];
     let impact = impactFactorMap[S[p]]
+    // if the query is identical, just take the impact
+    if (p === q) {
+      result[j] = impact;
+      continue
+    }
 
     for (let k=0; k<nucleotides.length; k++) {
       const nucleotide = nucleotides[k]
-      if (trackCount[q+1][nucleotide] > trackCount[p+1][nucleotide]) {
+      // only set if there is the possibility of a lower impact
+      if (impactFactorMap[nucleotide] < impact &&
+        trackCount[q+1][nucleotide] > trackCount[p+1][nucleotide]) {
         impact = impactFactorMap[nucleotide]
         break
       }
