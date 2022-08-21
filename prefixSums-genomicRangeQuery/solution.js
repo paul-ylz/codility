@@ -15,6 +15,8 @@ const impactFactorMap = {
   'A': 1, 'C': 2, 'G': 3, 'T': 4
 };
 
+const nucleotides = 'ACG';
+
 function solution(S, P, Q) {
   const N = S.length;
   let trackCount = new Array(N+1);
@@ -31,19 +33,19 @@ function solution(S, P, Q) {
 
   const M = P.length;
   let result = new Array(M)
-  const nucleotides = 'ACG';
   for (let j=0; j<M; j++) {
     const p = P[j];
     const q = Q[j];
+    let impact = impactFactorMap[S[p]]
 
     for (let k=0; k<nucleotides.length; k++) {
       const nucleotide = nucleotides[k]
       if (trackCount[q+1][nucleotide] > trackCount[p+1][nucleotide]) {
-        result[j] = impactFactorMap[nucleotide]
+        impact = impactFactorMap[nucleotide]
         break
       }
-      result[j] = 4
     }
+    result[j] = impact
 
   }
   return result
