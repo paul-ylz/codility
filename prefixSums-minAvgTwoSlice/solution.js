@@ -10,16 +10,24 @@ function solution(A) {
   let minAvgIdx = [10000, 0] // minAverage, startPosition
 
   for (let i=0; i<N-2; i++) {
+    // scan successive pairs.
     const avg2 = (A[i] + A[i+1]) / 2
     if (avg2 < minAvgIdx[0]) {
       minAvgIdx = [avg2, i]
     }
 
+    // scan successive triples.
     const avg3 = (A[i] + A[i+1] + A[i+2]) / 3
     if (avg3 < minAvgIdx[0]) {
       minAvgIdx = [avg3, i]
     }
   }
+  // as we loop only N-2 times, the final pair was not checked yet
+  const finalAvg2 = (A[N-2] + A[N-1]) / 2
+  if (finalAvg2 < minAvgIdx[0]) {
+    minAvgIdx = [finalAvg2, N-2]
+  }
+
   return minAvgIdx[1]
 };
 
