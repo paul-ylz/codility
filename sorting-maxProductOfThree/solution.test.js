@@ -7,4 +7,9 @@ describe('sorting - maxProductOfThree', () => {
     expect(solution(A)).toEqual(60)
   });
 
+  test('triple numbers', () => {
+    const A = [10, 10, 10]
+
+    expect(solution(A)).toEqual(1000)
+  });
 });

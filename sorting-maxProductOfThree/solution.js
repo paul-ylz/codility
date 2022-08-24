@@ -4,22 +4,13 @@
 //
 // solution returns the product of the maximal triplet to be found in array A.
 function solution(A) {
-
-  let large1 = largestUpTo(A, 100000+1)
-  let large2 = largestUpTo(A, large1)
-  let large3 = largestUpTo(A, large2)
+  A.sort()
+  const N = A.length
+  const large1 = A[N-1]
+  const large2 = A[N-2]
+  const large3 = A[N-3]
 
   return large1 * large2 * large3
-}
-
-function largestUpTo(A, x) {
-  let largest = 0
-  for (let i=0; i<A.length; i++) {
-    if (A[i] > largest && A[i] < x) {
-      largest = A[i]
-    }
-  }
-  return largest
 }
 
 module.exports = solution
