@@ -11,9 +11,9 @@
 //
 function solution(A) {
   const N = A.length
-  for (let p=0; p<N-3; p++) {
-    for (let q=p+1; q<N-2; q++) {
-      for (let r=q+1; r<N-1; r++) {
+  for (let p=0; p<=N-3; p++) {
+    for (let q=p+1; q<=N-2; q++) {
+      for (let r=q+1; r<=N-1; r++) {
         if (isTriangular(A, p, q, r)) {
           return 1
         }

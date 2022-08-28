@@ -22,6 +22,13 @@ describe("sorting - triangle solution", () => {
 
     expect(solution(A)).toEqual(expected)
   })
+
+  test("5 3 3", () => {
+    const A = [5, 3, 3]
+    const expected = 1
+
+    expect(solution(A)).toEqual(expected)
+  })
 })
 
 
