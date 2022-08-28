@@ -11,13 +11,11 @@
 //
 function solution(A) {
   const N = A.length
-  for (let p=0; p<=N-3; p++) {
-    for (let q=p+1; q<=N-2; q++) {
-      for (let r=q+1; r<=N-1; r++) {
-        if (isTriangular(A, p, q, r)) {
-          return 1
-        }
-      }
+
+  A.sort((a, b) => b - a)
+  for (let p=0; p<N-2; p++) {
+    if (isTriangular(A, p, p+1, p+2)) {
+      return 1
     }
   }
   return 0
