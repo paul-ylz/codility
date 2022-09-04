@@ -7,30 +7,34 @@
 function solution(A) {
   const N = A.length
   let result = 0
-
-  // create an array of intervals (lEdge, rEdge) for each disc, sorted by the left edge.
-  let intervals = A.map((el, idx) => [idx-el, idx+el])
-    .sort((a,b) => a[0] < b[0] ? -1 : 1)
-  // console.log("debug intervals: ", intervals)
+  let startPoints = new Array(N).fill(0)
+  let endPoints = new Array(N).fill(0)
 
   for (let i=0; i<N; i++) {
-    const rEdge = intervals[i][1]
+    // bound the start and end points by indices of the array
+    const s = 0 > A[i] - i ? i - A[i] : 0
+    const e = N-1 > A[i] + i ? i + A[i] : N-1;
+    startPoints[s]++
+    endPoints[e]++
+  }
 
-    let count
-    // how many starting edges are encompassed by this discs right edge? count all until the right edge lies to the left of the next circle's left edge.
-    indexOfLastIntersectingDisc = intervals.findIndex(el => el[0] > rEdge)
-    if (indexOfLastIntersectingDisc === -1) {
-      // every disc intersects
-      count = N-(i+1)
-    } else {
-      count = indexOfLastIntersectingDisc - (i+1)
+  // active tracks the count of discs where the current index lies within start and end points.
+  let active = 0
+  for (let i=0; i<N; i++) {
+    // if there are any new discs starting at this point
+    if (startPoints[i] > 0 ) {
+      // add number of intersections between active discs and new discs
+      result += active * startPoints[i]
+      // add the number of intersections between just the new discs
+      // but why is a sum formula used?
+      result += startPoints[i] * (startPoints[i]-1) / 2
+      if (10000000 < result) { return -1 }
+
+      active += startPoints[i]
     }
-    result += count
-    if (result > 10000000) { return -1 }
-    // console.log("debug: ", { i: i, rEdge: rEdge, lastIntersecting: indexOfLastIntersectingDisc, count: count, result: result})
+    active -= endPoints[i]
   }
   return result
-
 }
 
 module.exports = solution
