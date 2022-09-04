@@ -6,24 +6,30 @@
 // represents the radius of disc a.
 function solution(A) {
   const N = A.length
-  let intersectCount = 0
+  let result = 0
 
-  // for each disc
+  // create an array of intervals (lEdge, rEdge) for each disc, sorted by the left edge.
+  let intervals = A.map((el, idx) => [idx-el, idx+el])
+    .sort((a,b) => a[0] < b[0] ? -1 : 1)
+  // console.log("debug intervals: ", intervals)
+
   for (let i=0; i<N; i++) {
-    let iRightEdge = i+A[i]
-    // compare to each disc ahead of it
-    // disc i's center is always left of disc j's, therefore if it's right edge touches or exceeds j's left edge, there is an intersection.
-    for (let j=i+1; j<N; j++) {
-      let jLeftEdge = j-A[j]
-      if (iRightEdge >= jLeftEdge) {
-        intersectCount++
-        if (intersectCount > 10000000) {
-          return -1
-        }
-      }
+    const rEdge = intervals[i][1]
+
+    let count
+    // how many starting edges are encompassed by this discs right edge? count all until the right edge lies to the left of the next circle's left edge.
+    indexOfLastIntersectingDisc = intervals.findIndex(el => el[0] > rEdge)
+    if (indexOfLastIntersectingDisc === -1) {
+      // every disc intersects
+      count = N-(i+1)
+    } else {
+      count = indexOfLastIntersectingDisc - (i+1)
     }
+    result += count
+    if (result > 10000000) { return -1 }
+    // console.log("debug: ", { i: i, rEdge: rEdge, lastIntersecting: indexOfLastIntersectingDisc, count: count, result: result})
   }
-  return intersectCount
+  return result
 
 }
 
